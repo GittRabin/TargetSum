@@ -5,9 +5,13 @@ import PropTypes from 'prop-types';
 class RandomNumber extends React.Component{
   static propTypes={
     number:PropTypes.number.isRequired,
-    isSelected:PropTypes.bool.isRequired,
+    isDisabled:PropTypes.bool.isRequired,
+    onPress:PropTypes.func.isRequired,
+    id:PropTypes.number.isRequired,
   }
   pressEventHandler =()=>{
+    if(this.props.isDisabled){return;}
+    this.props.onPress(this.props.id);
     console.log(this.props.number);
 
   }
@@ -15,7 +19,7 @@ class RandomNumber extends React.Component{
     return(
       <TouchableOpacity
         onPress={this.pressEventHandler}>
-      <Text style={[styles.elements, this.props.isSelected && styles.selected]}>{this.props.number}</Text>
+      <Text style={[styles.elements, this.props.isDisabled && styles.selected]}>{this.props.number}</Text>
       </TouchableOpacity>
     );
   }
